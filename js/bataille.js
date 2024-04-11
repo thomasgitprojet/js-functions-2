@@ -54,8 +54,7 @@ let players = [
         pv : 50,
         xp : 5,
         poweratk : 8,
-        powerdef : 5,
-        damage : 0
+        powerdef : 5
     },
 
     {
@@ -64,8 +63,7 @@ let players = [
         pv : 50,
         xp : 4,
         poweratk : 3,
-        powerdef : 6,
-        damage : 0
+        powerdef : 6
     },
 
     {
@@ -74,8 +72,7 @@ let players = [
         pv : 50,
         xp : 6,
         poweratk : 6,
-        powerdef : 7,
-        damage : 0
+        powerdef : 7
     },
 
     {
@@ -84,8 +81,7 @@ let players = [
         pv : 50,
         xp : 7,
         poweratk : 4,
-        powerdef : 10,
-        damage : 0
+        powerdef : 10
     }
 ]
 
@@ -157,9 +153,6 @@ while (i < 2) {
 return playersBattle;
 }
 
-//////////////////////////////round/////////////////////////
-
-// function getRound
 
 ////////////////////////////function figth////////////////////////
 
@@ -169,15 +162,15 @@ function figth (figther, defender) {
 
     if (attackScore > defenceScore) {
 
-        console.log(`attaque : ${attackScore}`);
-        console.log(`défence : ${defenceScore}`);
-        console.log(`L'attaquant ${figther.playerName} win`);
+        console.log(`${figther.playerName} fait une attaque de : ${attackScore}`);
+        console.log(`${defender.playerName} pare le coup avec une défence de : ${defenceScore}`);
+        console.log(`L'attaquant ${figther.playerName} gagne la manche`);
 
        defender.pv-= attackScore
     }else {
-        console.log(`attaque : ${attackScore}`);
-        console.log(`défence : ${defenceScore}`);
-        console.log(`le défenseur ${defender.playerName} win`);
+        console.log(`${figther.playerName} fait une attaque de : ${attackScore}`);
+        console.log(`${defender.playerName} pare le coup avec une défence de : ${defenceScore}`);
+        console.log(`le défenseur ${defender.playerName} gagne la manche`);
 
        figther.pv-= defenceScore
     }
@@ -188,17 +181,20 @@ function figth (figther, defender) {
  // figth(playersBattle[0], playersBattle[1])
  // while (players.length)
 
+ let round = 1;
+ 
+ while (players.length > 1) {
 
-while (players.length > 1) {
+    console.log(`Début de la manche : ${round}`);
 
     let chall = getChallengers (players);
-        // console.log(chall);
+
 
         figth(chall[0], chall[1]);
        
        players = outPlayer(players)
         console.table(players);
-
+    round+= 1;
         isWinner(players)
 }
 
