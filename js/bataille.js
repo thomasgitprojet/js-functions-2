@@ -85,33 +85,44 @@ let players = [
     }
 ]
 
-///////////////////////////////////////calc pv///////////////////////
+// ///////////////////////////////////////calc pv///////////////////////
+// /**
+//  * 
+//  * @param {number} playerPv 
+//  * @param {number} playerDamage 
+//  * @returns 
+//  */
+// function calcPv(playerPv, playerDamage) {
+//     return playerPv - playerDamage
+// }
 
-function calcPv(playerPv, playerDamage) {
-    return playerPv - playerDamage
-}
 
-//////////////////////////////////function attack//////////////////////
-
+/**
+ * calculed random score of attacker
+ * @param {string} attacker name of attacker
+ * @returns {number} score of attacker 
+ */
 function getAttackScore(attacker) {
     return getRandomValue(attacker.poweratk) + attacker.xp;
 }
 
-// function attack (player) {
-//     return player.xp + Math.round(player.poweratk * Math.random())
-// }
 
-////////////////////////////////function defence//////////////////////
+
+/**
+ * calculed random score of defender
+ * @param {string} defender name of defender
+ * @returns {number} score of defender
+ */
 function getDefenceScore(defender) {
     return getRandomValue(defender.powerdef) + defender.xp;
 }
 
-// function defence (player) {
-//     return player.xp + Math.round(player.powerdef * Math.random())
-// }
 
-///////////////////////////////////////////out player////////////////////
-
+/**
+ * delate player if this pv = 0 
+ * @param {array} array 
+ * @returns {array} update array
+ */
 function outPlayer (array) {
     let player;
     for (player of players) {
@@ -125,9 +136,10 @@ function outPlayer (array) {
 }
 
 
-
-////////////////////////////////is winner/////////////////////////////////
-
+/**
+ * declared the winner of the game
+ * @param {array} array 
+ */
 function isWinner (array) {
 
     if (array.length == 1) {
@@ -136,8 +148,11 @@ function isWinner (array) {
 }
 
 
-/////////////////////////////challengers/////////////////////////////
-
+/**
+ * get random a defender and attacker
+ * @param {array} array 
+ * @returns {array} array of two players, the defender and the attacker
+ */
 function getChallengers (array) {
     let playersBattle = [];
     let i = 0;
@@ -155,7 +170,11 @@ return playersBattle;
 
 
 ////////////////////////////function figth////////////////////////
-
+/**
+ * get the result of the round and calcule the pv of looser
+ * @param {object} figther 
+ * @param {object} defender 
+ */
 function figth (figther, defender) {
     let attackScore = getAttackScore(figther);
     let defenceScore = getDefenceScore(defender);
@@ -174,12 +193,9 @@ function figth (figther, defender) {
 
        figther.pv-= defenceScore
     }
-    // console.log(figther, defender);
-    // return
+  
 }
- //figth(players[0], players[1])
- // figth(playersBattle[0], playersBattle[1])
- // while (players.length)
+
 
  let round = 1;
  
@@ -190,28 +206,13 @@ function figth (figther, defender) {
     let chall = getChallengers (players);
 
 
-        figth(chall[0], chall[1]);
+    figth(chall[0], chall[1]);
        
-       players = outPlayer(players)
+    players = outPlayer(players)
         console.table(players);
+
     round+= 1;
-        isWinner(players)
-}
+        
+    isWinner(players)
+};
 
-
-
-
-
-    // if (players.length > 1) {
-
-    //     let chall = getChallengers (players);
-    //     console.log(chall);
-
-    //     figth(chall[0], chall[1]);
-       
-    //    players = outPlayer(players)
-    //     console.table(players);
-    // }
-    // console.log(getChallengers(players));
-    // console.log(outPlayer(players));
-    // console.log(outPlayer(players));
